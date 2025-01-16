@@ -13,8 +13,9 @@ public class StudentArrayService {
         return students;
     }
 
-    public void setStudents(ArrayList<Student> students) {
-        this.students = students;
+    public Student addStudents(Student students) {
+        this.students.add(students);
+        return students;
     }
 
     public StudentArrayService(ArrayList<Student> students) {
