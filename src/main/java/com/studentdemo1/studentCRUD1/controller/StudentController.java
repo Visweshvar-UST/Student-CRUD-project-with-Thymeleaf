@@ -27,7 +27,7 @@ public class StudentController {
     }
 
     @GetMapping("/student/{id}")
-    public ResponseEntity<?> getStudentById(@PathVariable Long id) {
+    public ResponseEntity<?> getStudentById(@PathVariable("id") Long id) {
         Student student = studentService.getStudents().stream()
                 .filter(s -> s.getId().equals(id))
                 .findFirst()
@@ -39,7 +39,7 @@ public class StudentController {
     }
 
     @PutMapping("/student/{id}")
-    public ResponseEntity<?> updateStudent(@PathVariable Long id, @RequestBody Student updatedStudent) {
+    public ResponseEntity<?> updateStudent(@PathVariable("id") Long id, @RequestBody Student updatedStudent) {
         Student existingStudent = studentService.getStudents().stream()
                 .filter(s -> s.getId().equals(id))
                 .findFirst()
@@ -55,7 +55,7 @@ public class StudentController {
     }
 
     @DeleteMapping("/student/{id}")
-    public ResponseEntity<?> deleteStudent(@PathVariable Long id) {
+    public ResponseEntity<?> deleteStudent(@PathVariable("id") Long id) {
         boolean deleted = studentService.getStudents().removeIf(s -> s.getId().equals(id));
 
         if (deleted) {
