@@ -5,7 +5,6 @@ import com.studentdemo1.studentCRUD1.service.StudentArrayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -57,11 +56,9 @@ public class StudentController {
     @DeleteMapping("/student/{id}")
     public ResponseEntity<?> deleteStudent(@PathVariable("id") Long id) {
         boolean deleted = studentService.getStudents().removeIf(s -> s.getId().equals(id));
-
         if (deleted) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
-
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student not found");
     }
 }
