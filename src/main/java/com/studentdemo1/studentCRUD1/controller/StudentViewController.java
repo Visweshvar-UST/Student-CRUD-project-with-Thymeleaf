@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -22,10 +24,11 @@ public class StudentViewController {
         return "studentList";
     }
 
-    @GetMapping("/students/create")
-    public String createStudentForm(Model model) {
-        model.addAttribute("student", new Student());
-        return "studentForm";
+    @PostMapping("/student-view")
+    public String createStudent(@ModelAttribute Student student, Model model) {
+        studentService.addStudents(student);
+        model.addAttribute("students", studentService.getStudents());
+        return "redirect:/api/v1/students";
     }
 }
 

@@ -9,12 +9,13 @@ import java.util.Optional;
 @Service
 public class StudentArrayService {
     ArrayList<Student> students = new ArrayList<>();
+    Long seqId = 100l;
     
     public StudentArrayService() {
-        students.add(new Student(101L,"Viswa",22));
-        students.add(new Student(102L,"Axel",21));
-        students.add(new Student(103L,"Anu",21));
-        students.add(new Student(104L,"Rahul",23));
+        students.add(new Student(seqId++,"Viswa",22));
+        students.add(new Student(seqId++,"Axel",21));
+        students.add(new Student(seqId++,"Anu",21));
+        students.add(new Student(seqId++,"Rahul",23));
     }
 
     public ArrayList<Student> getStudents() {
@@ -22,6 +23,7 @@ public class StudentArrayService {
     }
 
     public Student addStudents(Student students) {
+        students.setId(seqId++);
         this.students.add(students);
         return students;
     }
