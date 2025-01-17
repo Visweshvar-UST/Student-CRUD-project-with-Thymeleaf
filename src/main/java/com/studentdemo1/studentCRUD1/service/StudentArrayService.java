@@ -9,6 +9,13 @@ import java.util.Optional;
 @Service
 public class StudentArrayService {
     ArrayList<Student> students = new ArrayList<>();
+    
+    public StudentArrayService() {
+        students.add(new Student(101L,"Viswa",22));
+        students.add(new Student(102L,"Axel",21));
+        students.add(new Student(103L,"Anu",21));
+        students.add(new Student(104L,"Rahul",23));
+    }
 
     public ArrayList<Student> getStudents() {
         return students;
