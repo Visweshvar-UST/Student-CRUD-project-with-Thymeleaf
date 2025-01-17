@@ -18,7 +18,7 @@ public class StudentViewController {
     public String getAllStudents(Model model) {
         model.addAttribute("students", studentService.getStudents());
         System.out.println("Rendering studentList page");
-        return "studentList"; // Matches studentList.html in templates
+        return "studentList";
     }
 }
 
