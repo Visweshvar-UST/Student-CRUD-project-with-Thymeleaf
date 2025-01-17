@@ -1,5 +1,6 @@
 package com.studentdemo1.studentCRUD1.controller;
 
+import com.studentdemo1.studentCRUD1.model.Student;
 import com.studentdemo1.studentCRUD1.service.StudentArrayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,12 @@ public class StudentViewController {
         model.addAttribute("students", studentService.getStudents());
         System.out.println("Rendering studentList page");
         return "studentList";
+    }
+
+    @GetMapping("/students/create")
+    public String createStudentForm(Model model) {
+        model.addAttribute("student", new Student());
+        return "studentForm";
     }
 }
 
