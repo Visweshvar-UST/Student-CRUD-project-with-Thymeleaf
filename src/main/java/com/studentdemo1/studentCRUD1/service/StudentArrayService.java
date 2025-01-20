@@ -57,10 +57,5 @@ public class StudentArrayService {
         }
         return false;
     }
-    @Override
-    public String toString() {
-        return "StudentArrayService{" +
-                "students=" + students +
-                '}';
-    }
+
 }

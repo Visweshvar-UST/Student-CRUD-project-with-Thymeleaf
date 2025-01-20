@@ -43,13 +43,11 @@ public class StudentController {
                 .filter(s -> s.getId().equals(id))
                 .findFirst()
                 .orElse(null);
-
         if (existingStudent != null) {
             existingStudent.setName(updatedStudent.getName());
             existingStudent.setAge(updatedStudent.getAge());
             return ResponseEntity.ok(existingStudent);
         }
-
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student not found");
     }
 

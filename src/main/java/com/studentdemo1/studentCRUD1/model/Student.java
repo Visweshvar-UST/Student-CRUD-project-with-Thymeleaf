@@ -1,5 +1,7 @@
 package com.studentdemo1.studentCRUD1.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 // import jakarta.persistence.Entity;
 // import jakarta.persistence.GeneratedValue;
 // import jakarta.persistence.GenerationType;
@@ -15,14 +17,22 @@ package com.studentdemo1.studentCRUD1.model;
 public class Student {
     // @Id
     // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@JsonProperty("id")
     Long id;
+    //@JsonProperty("name")
     String name;
-    int age;
+    //@JsonProperty("age")
+    Integer age;
 
     public Student() {
     }
 
-    public Student(Long id, String name, int age) {
+    public Student(String name, Integer age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public Student(Long id, String name, Integer age) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -48,7 +58,13 @@ public class Student {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
+
+    @Override
+    public String toString() {
+        return "Student [age=" + age + ", id=" + id + ", name=" + name + "]";
+    }
+    
 }
