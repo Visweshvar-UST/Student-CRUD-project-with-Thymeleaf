@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
 
 @Controller
@@ -42,13 +42,26 @@ public class StudentViewController {
         return "redirect:/api/v1/students";
     }
 
-    @PutMapping("/students/{id}")
-    public ResponseEntity<Student> updateStudent(@PathVariable("id") Long id, 
-                                                  @RequestParam("name") String name, 
-                                                  @RequestParam("age") int age) {
-        Student updatedStudent = new Student(id, name, age);
-        Student student = studentService.updateStudent(id, updatedStudent);
+    // @PutMapping("/students/{id}")
+    // public ResponseEntity<Student> updateStudent(@PathVariable("id") Long id, 
+    //                                               @RequestParam("name") String name, 
+    //                                               @RequestParam("age") int age) {
+    //     Student updatedStudent = new Student(id, name, age);
+    //     Student student = studentService.updateStudent(id, updatedStudent);
         
+    //     if (student != null) {
+    //         return ResponseEntity.ok(student);
+    //     } else {
+    //         return ResponseEntity.notFound().build();
+    //     }
+    // }
+
+    @PutMapping("/students/{id}")
+    public ResponseEntity<Student> updateStudent(@PathVariable("id") Long id, @RequestBody Student updatedStudent) {
+        updatedStudent.setId(id);
+        System.out.println(updatedStudent);
+        Student student = studentService.updateStudent(id, updatedStudent);
+    
         if (student != null) {
             return ResponseEntity.ok(student);
         } else {
@@ -56,17 +69,6 @@ public class StudentViewController {
         }
     }
     
-
-    // @PutMapping("/students/{id}")
-    // public ResponseEntity<Student> updateStudent(@PathVariable("id") Long id, @RequestBody Student updatedStudent) {
-    //     Student student = studentService.updateStudent(id, updatedStudent);
-    //     System.out.println(updatedStudent);
-    //     if (student != null) {
-    //         return ResponseEntity.ok(student);
-    //     } else {
-    //         return ResponseEntity.notFound().build();
-    //     }
-    // }
 
     @DeleteMapping("/students/{id}")
     public ResponseEntity<Void> deleteStudent(@PathVariable("id") Long id) {

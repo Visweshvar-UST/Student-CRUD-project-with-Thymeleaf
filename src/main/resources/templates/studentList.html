@@ -106,32 +106,61 @@ $(document).ready(function () {
         $('#editModal').modal('show');
     });
 
+    // $('#editStudentForm').on('submit', function (e) {
+    //     e.preventDefault();
+    //     const id = $('#edit-id').val();
+    //     const name = $('#edit-name').val();
+    //     const age = $('#edit-age').val();
+        
+    //     const dataToSend = `name=${encodeURIComponent(name)}&age=${encodeURIComponent(age)}`;
+    //     console.log("Sending data: ", dataToSend);
+        
+    //     $.ajax({
+    //         url: `/api/v1/students/${id}?${dataToSend}`,
+    //         method: 'PUT',
+    //         contentType: 'application/x-www-form-urlencoded',  // Use the correct content type for query params
+    //         success: function () {
+    //             console.log("Student updated successfully!");
+    //             alert('Student updated successfully!');
+    //             location.reload();
+    //         },
+    //         error: function (xhr, status, error) {
+    //             console.error("Error updating student:", xhr.responseText);
+    //             console.error("Status: " + status);
+    //             console.error("Error: " + error);
+    //             alert('Failed to update student.');
+    //         }
+    //     });
+    // });
+
     $('#editStudentForm').on('submit', function (e) {
-        e.preventDefault();
-        const id = $('#edit-id').val();
-        const name = $('#edit-name').val();
-        const age = $('#edit-age').val();
-        
-        const dataToSend = `name=${encodeURIComponent(name)}&age=${encodeURIComponent(age)}`;
-        console.log("Sending data: ", dataToSend);
-        
-        $.ajax({
-            url: `/api/v1/students/${id}?${dataToSend}`,
-            method: 'PUT',
-            contentType: 'application/x-www-form-urlencoded',  // Use the correct content type for query params
-            success: function () {
-                console.log("Student updated successfully!");
-                alert('Student updated successfully!');
-                location.reload();
-            },
-            error: function (xhr, status, error) {
-                console.error("Error updating student:", xhr.responseText);
-                console.error("Status: " + status);
-                console.error("Error: " + error);
-                alert('Failed to update student.');
-            }
-        });
+    e.preventDefault();
+
+    const id = $('#edit-id').val();
+    const name = $('#edit-name').val();
+    const age = $('#edit-age').val();
+
+    const dataToSend = JSON.stringify({id: id, name: name, age: age });
+    console.log("Sending data as JSON: ", dataToSend);
+
+    $.ajax({
+        url: `/api/v1/students/${id}`,
+        method: 'PUT',
+        contentType: 'application/json', // Specify JSON content type
+        data: dataToSend, // Send JSON data
+        success: function () {
+            console.log("Student updated successfully!");
+            alert('Student updated successfully!');
+            location.reload();
+        },
+        error: function (xhr, status, error) {
+            console.error("Error updating student:", xhr.responseText);
+            console.error("Status: " + status);
+            console.error("Error: " + error);
+            alert('Failed to update student.');
+        }
     });
+});
 
 
 // // Handle Edit Form Submission
