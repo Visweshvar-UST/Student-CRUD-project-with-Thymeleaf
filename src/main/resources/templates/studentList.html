@@ -10,53 +10,61 @@
 </head>
 <body>
     <div class="container mt-5">
-        <!-- Create New Student Form -->
-        <h3>Create New Student</h3>
-        <form th:action="@{/api/v1/student-view}" method="post">
-            <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="name" required>
+        <div class="row">
+            <!-- Create New Student Form (left side) -->
+            <div class="col-md-3" style="position: fixed; top: 30%; height: 100vh; overflow-y: auto;">
+                <h3>Create New Student</h3>
+                <form th:action="@{/api/v1/student-view}" method="post">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="age" class="form-label">Age</label>
+                        <input type="number" class="form-control" id="age" name="age" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
             </div>
-            <div class="mb-3">
-                <label for="age" class="form-label">Age</label>
-                <input type="number" class="form-control" id="age" name="age" required>
+    
+            <div class="col-md-4"></div>
+            <!-- Student List (right side) -->
+            <div class="col-md-8">
+                <h1 class="text-center">Students</h1>
+                <div class="table-responsive" style="max-height: 450px; overflow-y: auto;">
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="student : ${students}">
+                                <td th:text="${student.id}"></td>
+                                <td th:text="${student.name}"></td>
+                                <td th:text="${student.age}"></td>
+                                <td>
+                                    <button type="button" class="btn btn-warning btn-sm edit-btn"
+                                            th:data-id="${student.id}"
+                                            th:data-name="${student.name}"
+                                            th:data-age="${student.age}">
+                                        Edit
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-sm delete-btn" th:data-id="${student.id}">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-
-        <!-- Student List -->
-        <h1 class="text-center mt-4">Students</h1>
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped">
-                <thead class="table-dark">
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Age</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="student : ${students}">
-                        <td th:text="${student.id}"></td>
-                        <td th:text="${student.name}"></td>
-                        <td th:text="${student.age}"></td>
-                        <td>
-                            <button type="button" class="btn btn-warning btn-sm edit-btn"
-                                    th:data-id="${student.id}"
-                                    th:data-name="${student.name}"
-                                    th:data-age="${student.age}">
-                                Edit
-                            </button>
-                            <button type="button" class="btn btn-danger btn-sm delete-btn" th:data-id="${student.id}">
-                                Delete
-                            </button>
-                        </td>
-                    </tr>                    
-                </tbody>
-            </table>
         </div>
     </div>
+    
 
     <!-- Edit Student Modal -->
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
