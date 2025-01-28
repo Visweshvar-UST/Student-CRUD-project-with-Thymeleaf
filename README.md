@@ -13,3 +13,7 @@
     ```
     http://localhost:8081/api/v1/students
     ```
+
+## Screenshot
+
+![Screenshot](./asserts/Screenshot%202025-01-27%20125405.png)
